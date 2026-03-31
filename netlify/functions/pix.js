@@ -21,7 +21,7 @@ exports.handler = async function (event, context) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: "Valor inválido" }) };
     }
 
-    const amountInCents = Math.round(amount * 100);
+    const amountInCents = Math.round(amount);
     const identifier = "kerllen-" + Date.now() + "-" + Math.random().toString(36).substr(2, 6);
 
     const PUBLIC_KEY = process.env.SIGILOPAY_PUBLIC_KEY;
