@@ -60,16 +60,16 @@ console.log("SigiloPay resposta completa:", JSON.stringify(data));
       };
     }
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        qrcode: data.qrcode || data.pix_qrcode || data.qr_code,
-        qrcode_url: data.qrcode_url || data.pix_qrcode_url || data.qr_code_url,
-        txid: data.txid || data.id || identifier,
-        amount: amount,
-      }),
-    };
+   return {
+  statusCode: 200,
+  headers,
+  body: JSON.stringify({
+    qrcode: data.pix && data.pix.code ? data.pix.code : null,
+    qrcode_url: data.pix && data.pix.qrcode ? data.pix.qrcode : null,
+    txid: data.pix && data.pix.txid ? data.pix.txid : identifier,
+    amount: amount,
+  }),
+}; 
   } catch (err) {
     console.error("Function error:", err);
     return {
