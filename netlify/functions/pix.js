@@ -49,6 +49,7 @@ exports.handler = async function (event, context) {
     });
 
     const data = await response.json();
+console.log("SigiloPay resposta completa:", JSON.stringify(data));
 
     if (!response.ok) {
       console.error("SigiloPay error:", JSON.stringify(data));
