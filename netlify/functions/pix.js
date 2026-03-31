@@ -27,8 +27,6 @@ exports.handler = async function (event, context) {
     const PUBLIC_KEY = process.env.SIGILOPAY_PUBLIC_KEY;
     const SECRET_KEY = process.env.SIGILOPAY_SECRET_KEY;
 
-    const credentials = Buffer.from(`${PUBLIC_KEY}:${SECRET_KEY}`).toString("base64");
-
     const payload = {
       amount: amountInCents,
       identifier: identifier,
@@ -44,7 +42,8 @@ exports.handler = async function (event, context) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${credentials}`,
+        "x-public-key": PUBLIC_KEY,
+        "x-secret-key": SECRET_KEY,
       },
       body: JSON.stringify(payload),
     });
